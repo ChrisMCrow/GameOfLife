@@ -7,19 +7,22 @@ describe('Player', function() {
 
     beforeEach(function() {
         samplePlayer = new Teacher("Sally");
+        samplePlayer.salary = 50000;
         testGame = new Game("Sally", "Teacher", "Walter", "Doctor");
         testGame.player1.salary = 50000;
         testGame.player1.bank = 100;
     });    
 
     it('should use the getPaid method to validate add the players salary to their bank', function() {
+        let startingAmount = samplePlayer.bank;
         samplePlayer.getPaid();
-        expect(samplePlayer.bank).toEqual(samplePlayer.bank + samplePlayer.salary);
+        expect(samplePlayer.bank).toEqual(startingAmount + samplePlayer.salary);
     });
 
     it('should use the getRaise method to alter the players base salaray', function() {
+        let startingSalary = samplePlayer.salary;
         samplePlayer.getRaise(testGame.raiseMultiplier);
-        expect(samplePlayer.salary).toEqual(samplePlayer.salary * testGame.raiseMultiplier);
+        expect(samplePlayer.salary).toEqual(startingSalary * testGame.raiseMultiplier);
     });
 
     it('should add age to a player using the addAge method', function() {
@@ -104,22 +107,4 @@ describe('Player', function() {
         expect(samplePlayer.attributes.length).toEqual(1);
     });
 
-});
-
-describe('Game', function() {
-    let testGame = new Game("Sally", "Teacher", "Walter", "Doctor");
-
-    it('should use a contstructor to start a new game as well as two new players', function() {
-        expect(testGame.player1["profession"]).toEqual("Teacher");
-        expect(testGame.player2["profession"]).toEqual("Doctor");
-    });
-
-    it('should end the turn and cycle between 1 and 2', function() {
-        testGame.turn = 1;
-        expect(testGame.turn).toEqual(1);
-        testGame.endTurn();
-        expect(testGame.turn).toEqual(2);
-        testGame.endTurn();
-        expect(testGame.turn).toEqual(1);
-    });
 });

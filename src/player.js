@@ -10,20 +10,13 @@ export class Player {
     }
 
     getRaise(raiseMultiplier) {
-        this.salary += raiseMultiplier * this.salary;
+        this.salary *= raiseMultiplier;
     }
 
     addAge(years) {
-        (years == null) ? this.age += 1 : this.age += years;
-        if (!(this.inventory.includes("Spouse")) && this.age >= 26) {
-            this.inventory.push("Spouse");
-        }
-        if (this.inventory.includes("Spouse") && this.age < 40) {
-            let odds = Math.random();
-            if (odds < .05) {
-                this.inventory.push("Child");
-            }
-        }
+        (years == null) ? years = Math.ceil(Math.random() * 3) : years;
+        this.age += years;
+        return years;
     }
 
     costOfLiving() {
@@ -86,7 +79,7 @@ export class Player {
     }
 
     removeInventory(item) {
-        for (let i = 0; i < this.inventory.length; i++) {
+        for (let i = this.inventory.length - 1; i >= 0; i--) {
             if (this.inventory[i] == item) {
                 this.inventory.splice(i, 1);
             }
@@ -95,7 +88,9 @@ export class Player {
 
     addAttribute(attributeArray) {
         for (let i = 0; i < attributeArray.length; i++) {
-            this.attributes.push(attributeArray[i]);
+            // if (!(this.attributes.contains(attributeArray[i]))) {
+                this.attributes.push(attributeArray[i]);
+            // }
         }
     }
 
@@ -114,7 +109,7 @@ export class Doctor extends Player {
         this.profession = "Doctor";
         this.age = 28;
         this.bank = -200000;
-        this.salary = Math.floor(Math.random(6,10)) * 10000;
+        this.salary = (Math.floor(Math.random() * 5) + 6) * 10000;
         this.attributes = ["Knowledge", "Organization"];
         this.inventory = ["Car", "Insurance"];
     }
@@ -126,7 +121,7 @@ export class Teacher extends Player {
         this.profession = "Teacher";
         this.age = 22;
         this.bank = -100000;
-        this.salary = Math.floor(Math.random(3,6)) * 10000;
+        this.salary = (Math.floor(Math.random() * 4) + 3) * 10000;
         this.attributes = ["Knowledge", "Creativity"];
         this.inventory = ["Car"];
     }
@@ -138,7 +133,7 @@ export class Politician extends Player {
         this.profession = "Politician";
         this.age = 18;
         this.bank = 0;
-        this.salary = Math.floor(Math.random(2,4)) * 10000;
+        this.salary = (Math.floor(Math.random() * 3) + 2) * 10000;
         this.attributes = ["Charisma", "Organization"];
         this.inventory = ["House"];
     }
@@ -150,7 +145,7 @@ export class Artist extends Player {
         this.profession = "Artist";
         this.age = 18;
         this.bank = 0;
-        this.salary = Math.floor(Math.random(2,7)) * 10000;
+        this.salary = (Math.floor(Math.random() * 6) + 2) * 10000;
         this.attributes = ["Charisma", "Creativity"];
         this.inventory = ["Spouse"];
     }
