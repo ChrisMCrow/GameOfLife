@@ -36,6 +36,6 @@ export class Game {
 
     getNewEvent(player) {
         let index = Event.rollForEvent(player)
-        this.currentEvent = Event.createEvent(index);
+        this.currentEvent = Event.createEvent(index, player);
     }
 }

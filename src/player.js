@@ -53,18 +53,58 @@ export class Player {
 
         //Insurance costs of the player
         if (this.inventory.includes("Insurance")) {
-            console.log(insurancePayment);
             this.bank -= insurancePayment;
         }
 
         //Tax costs of the player
         if (this.salary > 160000) {
-            this.bank -= this.salary * .25;
+            this.bank -= this.salary * .20;
         } else if (this.salary > 90000) {
-            this.bank -= this.salary * .18;
+            this.bank -= this.salary * .15;
         } else {
             this.bank -= this.salary * .10;
         }        
+    }
+
+    static getAllPlayerStats() {
+        let playerArr = [];
+        let newDoctor = new Doctor("Sample");
+        playerArr.push(newDoctor);
+        let newTeacher = new Teacher("Sample");
+        playerArr.push(newTeacher);
+        let newPolitician = new Politician("Sample");
+        playerArr.push(newPolitician);
+        let newArtist = new Artist("Sample");
+        playerArr.push(newArtist);
+        return playerArr;                        
+    }
+
+    addInventory(itemArray) {
+        for (let i = 0; i < itemArray.length; i++) {
+            this.inventory.push(itemArray[i]);
+        }
+    }
+
+    removeInventory(item) {
+        for (let i = 0; i < this.inventory.length; i++) {
+            if (this.inventory[i] == item) {
+                this.inventory.splice(i, 1);
+            }
+        }
+    }
+
+    addAttribute(attributeArray) {
+        for (let i = 0; i < attributeArray.length; i++) {
+            this.attributes.push(attributeArray[i]);
+        }
+    }
+
+    removeAttribute(item) {
+        for (let i = 0; i < this.attributes.length; i++) {
+            if (this.attributes[i] == item) {
+                this.attributes.splice(i, 1);
+            }
+        }
     }
 }
 

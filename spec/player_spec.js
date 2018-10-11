@@ -1,4 +1,4 @@
-import { Teacher, Doctor } from './../src/player.js';
+import { Teacher, Player } from './../src/player.js';
 import { Game } from '../src/game.js';
 
 describe('Player', function() {
@@ -9,7 +9,7 @@ describe('Player', function() {
         samplePlayer = new Teacher("Sally");
         testGame = new Game("Sally", "Teacher", "Walter", "Doctor");
         testGame.player1.salary = 50000;
-        testGame.player1.bank = 100;        
+        testGame.player1.bank = 100;
     });    
 
     it('should use the getPaid method to validate add the players salary to their bank', function() {
@@ -70,11 +70,39 @@ describe('Player', function() {
         expect(testGame.player1.bank).toEqual(-18900); //50000 salary, bottom tier
         testGame.player1.salary = 100000;  
         testGame.player1.costOfLiving();        
-        expect(testGame.player1.bank).toEqual(-63400); //100000 salary, bottom tier
+        expect(testGame.player1.bank).toEqual(-60400); //100000 salary, bottom tier
         testGame.player1.salary = 200000;
         testGame.player1.costOfLiving();          
-        expect(testGame.player1.bank).toEqual(-164900); //200000 salary, bottom tier
+        expect(testGame.player1.bank).toEqual(-151900); //200000 salary, bottom tier
     });      
+
+    it('should properly return all 4 players to display on the main webpage', function() {
+        let playerArr = Player.getAllPlayerStats();
+        expect(playerArr[0].profession).toEqual("Doctor");
+        expect(playerArr[1].profession).toEqual("Teacher");
+        expect(playerArr[2].profession).toEqual("Politician");
+        expect(playerArr[3].profession).toEqual("Artist");
+    });
+
+    it('should add multiple items to a players inventory using addInventory method', function() {
+        samplePlayer.addInventory(["House", "Insurance"]);
+        expect(samplePlayer.inventory.length).toEqual(3);
+    });
+
+    it('should remove items from inventory using removeInventory method', function() {
+        samplePlayer.removeInventory("Car");
+        expect(samplePlayer.inventory.length).toEqual(0);
+    });
+
+    it('should add multiple attributes to a players inventory using addAttribute method', function() {
+        samplePlayer.addAttribute(["Charisma", "Organization"]);
+        expect(samplePlayer.attributes.length).toEqual(4);
+    });
+
+    it('should remove attributes from players using removeAttribute method', function() {
+        samplePlayer.removeAttribute("Knowledge");
+        expect(samplePlayer.attributes.length).toEqual(1);
+    });
 
 });
 
