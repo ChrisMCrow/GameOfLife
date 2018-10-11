@@ -1,4 +1,5 @@
 import { Player, Doctor, Teacher, Politician, Artist } from "./player";
+import { Event } from "./event";
 
 export class Game {
     
@@ -7,6 +8,7 @@ export class Game {
         this.player2 = Game.createCharacter(player2name, player2profession);
         this.turn = Math.ceil(Math.random(0,2));
         this.raiseMultiplier = 1.05;
+        this.currentEvent;
     }
 
     static createCharacter(playerName, playerProfession) {
@@ -23,12 +25,17 @@ export class Game {
             return "error";
         }
     }
-    
+
     endTurn() {
         if (this.turn === 1) {
             this.turn++
         } else {
             this.turn = 1;
         }
+    }
+
+    getNewEvent(player) {
+        let index = Event.rollForEvent(player)
+        this.currentEvent = Event.createEvent(index);
     }
 }

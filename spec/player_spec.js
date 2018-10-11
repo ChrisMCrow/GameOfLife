@@ -63,7 +63,6 @@ describe('Player', function() {
         testGame.player1.costOfLiving();        
         expect(testGame.player1.bank).toEqual(-51100); //with insurance        
         expect(testGame.player1.inventory.includes("Insurance")).toEqual(true);        
-                
     });
 
     it('should properly account for taxes on salary', function() {
