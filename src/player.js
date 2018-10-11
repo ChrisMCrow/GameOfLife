@@ -53,6 +53,7 @@ export class Player {
 
         //Insurance costs of the player
         if (this.inventory.includes("Insurance")) {
+            console.log(insurancePayment);
             this.bank -= insurancePayment;
         }
 

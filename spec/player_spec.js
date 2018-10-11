@@ -2,8 +2,15 @@ import { Teacher, Doctor } from './../src/player.js';
 import { Game } from '../src/game.js';
 
 describe('Player', function() {
-    let samplePlayer = new Teacher("Sally");
-    let testGame = new Game("Sally", "Teacher", "Walter", "Doctor");
+    let samplePlayer;
+    let testGame;
+
+    beforeEach(function() {
+        samplePlayer = new Teacher("Sally");
+        testGame = new Game("Sally", "Teacher", "Walter", "Doctor");
+        testGame.player1.salary = 50000;
+        testGame.player1.bank = 100;        
+    });    
 
     it('should use the getPaid method to validate add the players salary to their bank', function() {
         samplePlayer.getPaid();
@@ -22,9 +29,54 @@ describe('Player', function() {
         expect(samplePlayer.age).toEqual(26);
     });
 
-    it('should properly account for cost of living expenses', function() {
-        //write test here
+    it('should properly account for cost of transportation', function() {
+        testGame.player1.costOfLiving();           
+        expect(testGame.player1.bank).toEqual(-18900); //car no loan
+        let car = testGame.player1.inventory.indexOf("Car");
+        testGame.player1.inventory.splice(car, 1);
+        testGame.player1.costOfLiving();
+        expect(testGame.player1.bank).toEqual(-37400); //no car
+        expect(testGame.player1.inventory.includes("Car")).toEqual(false);
+        testGame.player1.mortgage = 2;
+        testGame.player1.costOfLiving();        
+        expect(testGame.player1.bank).toEqual(-55900); //car with loan
     });
+
+    it('should properly account for cost of houses', function() {
+        testGame.player1.inventory.push("House");
+        testGame.player1.costOfLiving();
+        expect(testGame.player1.bank).toEqual(-9400); //house no loan
+        expect(testGame.player1.inventory.includes("House")).toEqual(true);        
+        testGame.player1.inventory.push("House");
+        testGame.player1.costOfLiving();
+        expect(testGame.player1.bank).toEqual(-18900); //house no with loan
+        let house = testGame.player1.inventory.indexOf("House");
+        testGame.player1.inventory.splice(house, 1);
+        testGame.player1.costOfLiving();
+        expect(testGame.player1.bank).toEqual(-28400); //no house, renting                  
+    });    
+
+    it('should properly account for cost of insurance', function() {
+        testGame.player1.costOfLiving();
+        expect(testGame.player1.bank).toEqual(-18900); //no insurance
+        testGame.player1.inventory.push("Insurance");
+        testGame.player1.costOfLiving();        
+        expect(testGame.player1.bank).toEqual(-51100); //with insurance        
+        expect(testGame.player1.inventory.includes("Insurance")).toEqual(true);        
+                
+    });
+
+    it('should properly account for taxes on salary', function() {
+        testGame.player1.costOfLiving();
+        expect(testGame.player1.bank).toEqual(-18900); //50000 salary, bottom tier
+        testGame.player1.salary = 100000;  
+        testGame.player1.costOfLiving();        
+        expect(testGame.player1.bank).toEqual(-63400); //100000 salary, bottom tier
+        testGame.player1.salary = 200000;
+        testGame.player1.costOfLiving();          
+        expect(testGame.player1.bank).toEqual(-164900); //200000 salary, bottom tier
+    });      
+
 });
 
 describe('Game', function() {
