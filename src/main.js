@@ -9,8 +9,8 @@ let thisGame;
 function updateDisplay() {
     $("#player1displayName").text(thisGame.player1.name);
     $("#player1displayProfession").text(thisGame.player1.profession);        
-    $("#player1bank").text(`Bank Account: $${thisGame.player1.bank}`);
-    $("#player1salary").text(`Salary: $${thisGame.player1.salary}`);
+    $("#player1bank").text(`Bank Account: $${thisGame.player1.formatMoney(thisGame.player1.bank)}`);
+    $("#player1salary").text(`Salary: $${thisGame.player1.formatMoney(thisGame.player1.salary)}`);
     $("#player1age").text(`Age: ${thisGame.player1.age} years old`);
     $("#player1attributes").empty();
     thisGame.player1.attributes.forEach(function(attr) {
@@ -22,8 +22,8 @@ function updateDisplay() {
     });       
     $("#player2displayName").text(thisGame.player2.name);
     $("#player2displayProfession").text(thisGame.player2.profession);          
-    $("#player2bank").text(`Bank Account: $${thisGame.player2.bank}`);
-    $("#player2salary").text(`Salary: $${thisGame.player2.salary}`);
+    $("#player2bank").text(`Bank Account: $${thisGame.player2.formatMoney(thisGame.player2.bank)}`);
+    $("#player2salary").text(`Salary: $${thisGame.player2.formatMoney(thisGame.player2.salary)}`);
     $("#player2age").text(`Age: ${thisGame.player2.age} years old`);
     $("#player2attributes").empty();
     thisGame.player2.attributes.forEach(function(attr) {
@@ -58,8 +58,6 @@ $(document).ready(function() {
         $('#eventDescription').text(thisGame.currentEvent.description); 
         $('form#drawEvent').hide();
         $('form#endTurn').show();
-        console.log(thisGame.player1.bank)
-        console.log(thisGame.player2.bank)
 
     });
 
@@ -70,11 +68,13 @@ $(document).ready(function() {
         thisGame.turnPlayer.addAge();
         thisGame.turnPlayer.costOfLiving();
         thisGame.endTurn();
-        thisGame.gameOver();
-        thisGame.allGameOver();
-        updateDisplay();
+        if (thisGame.gameOver) {
+          $('#gameOver').text("Game Over");
+        } else {
+          $('form#drawEvent').show();
+        }
         $('form#endTurn').hide();
-        $('form#drawEvent').show();
+        updateDisplay();
         $('#event').empty();
         $('#eventDescription').empty(); 
     });  

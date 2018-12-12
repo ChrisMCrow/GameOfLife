@@ -1,83 +1,87 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="bundle.js"></script>
-    <title>GameOfLife</title>
-  </head>
-  <body>
-    <div class="container">
-      <h1 class="jumbotron">Game Of Life</h1>
-      <form id="character-selection">
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="player1name">Player 1, enter your name:</label>
-              <input class="form-control" name="player1name" id="player1name" type="text" required>
-            </div>
-            <div class="form-group">
-              <label for="player1profession">Player 1, select a profession:</label>
-              <select class="form-group" id="player1profession" name="player1profession">
-                <option value="Doctor">Doctor</option>
-                <option value="Teacher">Teacher</option>
-                <option value="Artist">Artist</option>
-                <option value="Politician">Politician</option>
-              </select>
-            </div>
+
+<head>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="bundle.js"></script>
+  <title>GameOfLife</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="jumbotron">Game Of Life</h1>
+    <form id="character-selection">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="player1name">Player 1, enter your name:</label>
+            <input class="form-control" name="player1name" id="player1name" type="text" required>
           </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="player2name">Player 2, enter your name:</label>
-              <input class="form-control" name="player2name" id="player2name" type="text" required>
-            </div>
-            <div class="form-group">
-              <label for="player2profession">Player 2, select a profession:</label>
-              <select class="form-group" id="player2profession" name="player2profession">
-                <option value="Doctor">Doctor</option>
-                <option value="Teacher">Teacher</option>
-                <option value="Artist">Artist</option>
-                <option value="Politician">Politician</option>
-              </select>
-            </div>
+          <div class="form-group">
+            <label for="player1profession">Player 1, select a profession:</label>
+            <select class="form-group" id="player1profession" name="player1profession">
+              <option value="Doctor">Doctor</option>
+              <option value="Teacher">Teacher</option>
+              <option value="Artist">Artist</option>
+              <option value="Politician">Politician</option>
+            </select>
           </div>
-          <button class="btn btn-primary">Start Game</button>   
         </div>
-      </form>
-      <div class="row" id='gameBoard'>
-          <div class="col-sm-3">
-              <h2 id='player1displayName'></h2>
-              <h3 id='player1displayProfession'></h3>              
-              <h6 id='player1bank'></h6>
-              <h6 id='player1salary'></h6>              
-              <h6 id='player1age'></h6>
-              <h5>Attributes</h5>
-              <h6 id='player1attributes'></h6>
-              <h5>Valuables</h5>
-              <h6 id='player1inventory'></h6>
-            </div>
-            <div class="col-sm-6">
-              <h2 id='turn'></h2>
-              <form id='drawEvent'>
-                <button id='drawButton' type='submit' class='btn btn-info'>Draw Event</button>
-              </form>
-              <form id='endTurn'>
-                <button id='endButton' type='submit' class='btn btn-danger'>End Turn</button>
-              </form>              
-              <h2 id='event'></h2>
-              <p id='eventDescription'></p>              
-            </div>
-            <div class="col-sm-3">
-                <h2 id='player2displayName'></h2>
-                <h3 id='player2displayProfession'></h3>                   
-                <h6 id='player2bank'></h6>
-                <h6 id='player2salary'></h6>                  
-                <h6 id='player2age'></h6>
-                <h5>Attributes</h5>
-                <h6 id='player2attributes'></h6>
-                <h5>Valuables</h5>
-                <h6 id='player2inventory'></h6>
-            </div>                          
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="player2name">Player 2, enter your name:</label>
+            <input class="form-control" name="player2name" id="player2name" type="text" required>
+          </div>
+          <div class="form-group">
+            <label for="player2profession">Player 2, select a profession:</label>
+            <select class="form-group" id="player2profession" name="player2profession">
+              <option value="Doctor">Doctor</option>
+              <option value="Teacher">Teacher</option>
+              <option value="Artist">Artist</option>
+              <option value="Politician">Politician</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-primary">Start Game</button>
+      </div>
+    </form>
+    <div class="row" id='gameBoard'>
+      <div class="col-sm-3">
+        <h2 id='player1displayName'></h2>
+        <h3 id='player1displayProfession'></h3>
+        <h6 id='player1bank'></h6>
+        <h6 id='player1salary'></h6>
+        <h6 id='player1age'></h6>
+        <h5>Attributes</h5>
+        <h6 id='player1attributes'></h6>
+        <h5>Valuables</h5>
+        <h6 id='player1inventory'></h6>
+      </div>
+      <div class="col-sm-6">
+        <h2 id='turn'></h2>
+        <form id='drawEvent'>
+          <button id='drawButton' type='submit' class='btn btn-info'>Draw Event</button>
+        </form>
+        <form id='endTurn'>
+          <button id='endButton' type='submit' class='btn btn-danger'>End Turn</button>
+        </form>
+        <h2 id='event'></h2>
+        <p id='eventDescription'></p>
+      </div>
+      <div class="col-sm-3">
+        <h2 id='player2displayName'></h2>
+        <h3 id='player2displayProfession'></h3>
+        <h6 id='player2bank'></h6>
+        <h6 id='player2salary'></h6>
+        <h6 id='player2age'></h6>
+        <h5>Attributes</h5>
+        <h6 id='player2attributes'></h6>
+        <h5>Valuables</h5>
+        <h6 id='player2inventory'></h6>
       </div>
     </div>
-  </body>
+    <div id='gameOver'></div>
+  </div>
+</body>
+
 </html>
