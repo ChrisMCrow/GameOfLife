@@ -15,7 +15,9 @@ export class Player {
   }
 
   addAge(years) {
-    (years == null) ? years = Math.ceil(Math.random() * 3) : years;
+    if (years === null) {
+      years = Math.ceil(Math.random() * 3) 
+    }
     this.age += years;
     return years;
   }
