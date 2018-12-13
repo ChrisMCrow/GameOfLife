@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 function Player(props) {
   const { name, profession, age, bank, salary, attributes, inventory, mortgage, autoLoan, gameOver} = props.playerDetails;

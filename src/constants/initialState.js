@@ -1,4 +1,3 @@
-import { Politician, Doctor, Teacher, Artist } from './../models/player.js';
 
 export const initialState = {
   players: {
@@ -6,6 +5,11 @@ export const initialState = {
     player2: null 
   },
   events: {
-    gameInProgress: false
+    gameInProgress: false,
+    turn: null,
+    currentPlayer: null,
+    raiseMultiplier: 1.05,
+    gameOver: false,
+    currentEvent: null
   }
 }

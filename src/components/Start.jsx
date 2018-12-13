@@ -1,6 +1,7 @@
 import React from 'react';
-import { addPlayer, startGame } from './../actions';
+import { startGame } from './../actions';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 const PlayerForm = (props) => {
 
@@ -9,9 +10,8 @@ const PlayerForm = (props) => {
 
   function handleSubmitButton(e) {
     e.preventDefault();
-    props.dispatch(addPlayer(_player1.value,
+    props.dispatch(startGame(_player1.value,
       _player2.value, _player1Prof.value, _player2Prof.value));
-    props.dispatch(startGame());
   }
   return (
     <div>
@@ -44,4 +44,4 @@ PlayerForm.propTypes = {
   dispatch: PropTypes.func
 }
 
-export default PlayerForm;
+export default connect()(PlayerForm);

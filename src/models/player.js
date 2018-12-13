@@ -83,7 +83,7 @@ export class Player {
 
   removeInventory(item) {
     for (let i = this.inventory.length - 1; i >= 0; i--) {
-      if (this.inventory[i] == item) {
+      if (this.inventory[i] === item) {
         this.inventory.splice(i, 1);
       }
     }
@@ -99,7 +99,7 @@ export class Player {
 
   removeAttribute(item) {
     for (let i = 0; i < this.attributes.length; i++) {
-      if (this.attributes[i] == item) {
+      if (this.attributes[i] === item) {
         this.attributes.splice(i, 1);
       }
     }

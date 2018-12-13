@@ -5,10 +5,12 @@ import Progress from './Progress';
 import Start from './Start';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import EventDetails from './EventDetails';
 
 class Body extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
   }
 
 
@@ -21,8 +23,8 @@ class Body extends Component {
   //   console.log(e);
   // }
 
-  render() {
 
+  render() {
     return (
       <div className='body-wrapper'>
         <style jsx>{`
@@ -43,13 +45,20 @@ class Body extends Component {
         {this.props.events.gameInProgress ? (
           <div>
             <Progress />
+            {this.props.events.currentEvent ? (
+              <EventDetails players={this.props.players} dispatch={this.props.dispatch} events={this.props.events}/>
+            ) : (
+              null
+            )}
 
             <div className='section-wrapper'>
               <Player playerDetails={this.props.players.player1} />
               {/* <Player player={this.props.players.player1}/> */}
             </div>
             <div className='middle-wrapper'>
-              <Event />
+              <Event player={this.props.events.currentPlayer}
+                dispatch={this.props.dispatch}
+              />
             </div>
             <div className='section-wrapper'>
               <Player playerDetails={this.props.players.player2} />
@@ -69,12 +78,14 @@ class Body extends Component {
 }
 
 Body.propTypes = {
-  playersInfo: PropTypes.object,
+  players: PropTypes.object,
+  events: PropTypes.object
 }
 
 const mapStateToProps = state => {
-  console.log(state);
+  console.log(state)
   return {
+    state: state,
     players: state.players,
     events: state.events,
   };

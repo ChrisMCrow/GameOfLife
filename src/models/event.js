@@ -324,6 +324,7 @@ export class Event {
             case (index == 49):
                 name = "Natural Disaster";
                 description = "Your home is hit by a combination of hurricane, tornado, fire, and earthquake. If you're not insured, you lose your home, your car, and $30,000. If insured, you lose $10,000.";
+                /*eslint no-unused-expressions: [0, { allowShortCircuit: true, allowTernary: true }]*/
                 player.inventory.includes("Insurance") ? player.bank -= 10000 : (player.removeInventory("House"), player.removeInventory("Car"), player.bank -= 30000);
                 newEvent = new Event(index, player, name, description);                
                 return newEvent;
@@ -374,3 +375,4 @@ export class Event {
     }
 }
 
+export default Event;
