@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import Player from './Player';
 import Event from './Event';
 import { Politician, Doctor, Teacher, Artist } from './../models/player.js';
+import Progress from './Progress';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 class Body extends Component {
+  constructor(props) {
+    super(props);
+    console.log(props);
+  }
 
   render() {
     return (
@@ -17,20 +24,31 @@ class Body extends Component {
             display: inline-block;
           }
         `}</style>
+        <Progress />
         <div className='section-wrapper'>
-          <Player player={new Doctor("Chris")}/>
-          <Player player={new Teacher("Brian")}/>
+          <Player playerDetails={this.props.playersInfo.player1}/>
+          {/* <Player player={this.props.playersInfo.player1}/> */}
         </div>
         <div className='section-wrapper'>
           <Event />
         </div>
         <div className='section-wrapper'>
-          <Player player={new Politician("Hyewon")}/>
-          <Player player={new Artist("Skye")}/>                        
+          <Player playerDetails={this.props.playersInfo.player2}/>
+          {/* <Player player={this.props.playersInfo.player2}/>                         */}
         </div>
       </div>
     );
   }
 }
 
-export default Body;
+Body.propTypes = {
+  playersInfo: PropTypes.object,
+}
+
+const mapStateToProps = state => {
+  return {
+    playersInfo: state.playersInfo,
+  };
+};
+
+export default connect(mapStateToProps)(Body);
