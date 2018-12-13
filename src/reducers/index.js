@@ -5,7 +5,7 @@ import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
   events: eventReducer,
-  playersInfo: playerReducer
+  players: playerReducer
 });
 
 export default rootReducer;

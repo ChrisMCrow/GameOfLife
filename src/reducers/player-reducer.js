@@ -1,46 +1,21 @@
 import { Politician, Doctor, Teacher, Artist } from './../models/player.js';
-import constants from './../constants';
-const { c } = constants;
+import { initialState } from './../constants/initialState';
+import { newPlayer } from './../actions';
 
-const initialState = {
-  player1: new Politician("Chris"),
-  player2: new Artist("Skye")
+export default (state = initialState.players, action) => {
+  let newState;
+  switch (action.type) {
+    case 'ADD_PLAYER':
+      newState = Object.assign({}, state);
+
+
+      // newState.player2.name = action.player2;
+      // newState.player1.name = action.player1;
+      newState.player1 = newPlayer(action.player1Prof, action.player1);
+      newState.player2 = newPlayer(action.player2Prof, action.player2);
+      return newState;
+    default:
+      return state;
+  }
 }
 
-
-export default (state = initialState, action) => {
-  // let newState;
-  // const { names, location, issue, timeOpen, id, formattedWaitTime } = action;
-
-  // switch (action.type) {
-  // case c.ADD_TICKET:
-  //   newState = Object.assign({}, state, {
-  //     [id]: {
-  //       names: names,
-  //       location: location,
-  //       issue: issue,
-  //       timeOpen: timeOpen,
-  //       id: id,
-  //       formattedWaitTime: formattedWaitTime
-  //     }
-  //   });
-  //   return newState;
-
-  // case c.UPDATE_TIME:
-  //   const newTicket = Object.assign({}, state[id], {formattedWaitTime});
-  //   newState = Object.assign({}, state, {
-  //     [id]: newTicket
-  //   });
-  //   return newState;
-
-  // case c.RECEIVE_TICKET:
-  //   newState = Object.assign({}, state);
-  //   newState[action.ticket.id] = action.ticket;
-  //   return newState;
-
-  // default:
-  //   return state;
-  // }
-
-  return state;
-};
