@@ -17,7 +17,12 @@ class Body extends Component {
       <div className='body-wrapper'>
         <style jsx>{`
           .body-wrapper {
-            margin: 0 5vw;
+            margin: 0 4vw;
+          }
+          .middle-wrapper {
+            width: 25vw;
+            margin: 2vw;
+            display: inline-block;
           }
           .section-wrapper {
             width: 30vw;
@@ -29,7 +34,7 @@ class Body extends Component {
           <Player playerDetails={this.props.playersInfo.player1}/>
           {/* <Player player={this.props.playersInfo.player1}/> */}
         </div>
-        <div className='section-wrapper'>
+        <div className='middle-wrapper'>
           <Event />
         </div>
         <div className='section-wrapper'>

@@ -10,6 +10,9 @@ function Event() {
   return(
     <div className='event-wrapper'>
       <style jsx>{`
+        .event-wrapper {
+          text-align: center;
+        }
         #wheel {
           width: 100%;
           cursor: pointer;

@@ -7,7 +7,7 @@ import City from './assets/city.jpeg';
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div>
         <style jsx global>{`
           body {
             color: white;
